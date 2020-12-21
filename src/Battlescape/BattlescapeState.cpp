@@ -2625,33 +2625,6 @@ inline void BattlescapeState::handle(Action *action)
 				{
 					saveVoxelView();
 				}
-				
-				// inspect alien
-				if (key == SDLK_F1 && ctrlPressed)
-				{
-					_battleGame->cancelCurrentAction();
-					BattleUnit* bu = nullptr;
-					Position newPos;
-					_map->getSelectorPosition(&newPos);
-					Tile* tile = _save->getTile(newPos);
-					if (tile)
-					{
-						bu = tile->getOverlappingUnit(_save);
-
-						if (bu && (bu->getVisible() || _save->getDebugMode()))
-						{
-							if (_save->getDebugMode() && (SDL_GetModState() & KMOD_CTRL) != 0)
-							{
-								// mind probe
-								popup(new UnitInfoState(bu, this, false, true));
-							}
-							else
-							{
-								_game->pushState(new AlienInventoryState(bu));
-							}
-						}
-					}				
-				}
 			}
 		}
 	}
